@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>PHP Calculator with DB</title>
+    <link rel="stylesheet" href="calculator-styles.css">
 
 </head>
 
