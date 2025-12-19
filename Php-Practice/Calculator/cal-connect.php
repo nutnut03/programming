@@ -26,7 +26,6 @@ $conn->close();
 ?>
 
 <body>
-
 </body>
 
 </html>

@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="calculator">
-        <h2>Calculator with DB Storage</h2>
+        <h2>Calculator</h2>
         <form method="POST" action="">
             <input type="number" step="any" name="num1" placeholder="Enter first number" required>
             <input type="number" step="any" name="num2" placeholder="Enter second number" required>
