@@ -1,6 +1,19 @@
 <?php
 // calculator.php
 
+// Database connection
+$servername = "localhost";
+$username   = "root";      // change if needed
+$password   = "";          // change if needed
+$dbname     = "calculator_db";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 $result = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $num1 = (float)$_POST['num1'];
@@ -23,6 +36,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         default:
             $result = "Invalid operation";
     }
+
+    // Only store numeric results
+    if (is_numeric($result)) {
+        $stmt = $conn->prepare("INSERT INTO calculations (num1, num2, operation, result) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ddsd", $num1, $num2, $operation, $result);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -30,15 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="calculator-styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Calculator</title>
+    <title>PHP Calculator with DB</title>
 
 </head>
 
 <body>
     <div class="calculator">
-        <h2>Simple Calculator</h2>
+        <h2>Calculator with DB Storage</h2>
         <form method="POST" action="">
             <input type="number" step="any" name="num1" placeholder="Enter first number" required>
             <input type="number" step="any" name="num2" placeholder="Enter second number" required>
