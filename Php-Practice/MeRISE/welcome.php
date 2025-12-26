@@ -169,7 +169,7 @@ $timeInExists = $conn->query("SELECT id FROM attendance WHERE date=CURDATE() AND
 
 
 
-    <!-- 📚 Library Book Gallery -->
+    <!-- 📚 Library Book Gallery 
     <div class="library-container">
         <h2 class="library-title">📚 MeRISE E-Library</h2>
 
@@ -236,7 +236,7 @@ $timeInExists = $conn->query("SELECT id FROM attendance WHERE date=CURDATE() AND
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- ✅ Responsive Footer -->
     <footer class="footer">
