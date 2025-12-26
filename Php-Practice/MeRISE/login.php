@@ -58,7 +58,7 @@ if ($_POST) {
 
             <button type="submit" class="btn">Login</button>
 
-            <p class="redirect">Already have an account? <a href="login.php">Login here</a></p>
+            <p class="redirect">Already have an account? <a href="register.php">Register here</a></p>
         </form>
     </div>
     <!-- ✅ Responsive Footer -->
