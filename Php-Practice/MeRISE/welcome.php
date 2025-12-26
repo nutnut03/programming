@@ -104,43 +104,36 @@ $timeInExists = $conn->query("SELECT id FROM attendance WHERE date=CURDATE() AND
 
 
     <!-- ✅ Responsive Welcome Box -->
-    <div class="welcome-container">
-        <div class="welcome-box">
-            <h1>Welcome, <?= htmlspecialchars($_SESSION['username']); ?> 🎉</h1>
-            <p id="greeting"></p>
-            <p id="clock"></p>
-        </div>
-        <div>
-            <div class="container">
-                <h2>Time In/Out Tracker</h2>
-                <p>📅 Today’s Date: <strong><?= $currentDate ?></strong></p>
-                <p>⏰ Current Time: <strong id="clock"></strong></p>
+    <div>
+        <div class="container">
+            <h2>Time In/Out Tracker</h2>
+            <p>📅 Today’s Date: <strong><?= $currentDate ?></strong></p>
+            <p>⏰ Current Time: <strong id="clock"></strong></p>
 
-                <form method="POST" action="">
-                    <?php if (!$timeInExists): ?>
-                        <button type="submit" name="action" value="in">Time In</button>
-                    <?php endif; ?>
-                    <button type="submit" name="action" value="out">Time Out</button>
-                </form>
-
-                <?php if ($message !== ""): ?>
-                    <div class="message"><?= $message ?></div>
+            <form method="POST" action="">
+                <?php if (!$timeInExists): ?>
+                    <button type="submit" name="action" value="in">Time In</button>
                 <?php endif; ?>
+                <button type="submit" name="action" value="out">Time Out</button>
+            </form>
 
-                <h3>Today's Attendance Log</h3>
-                <table>
+            <?php if ($message !== ""): ?>
+                <div class="message"><?= $message ?></div>
+            <?php endif; ?>
+
+            <h3>Today's Attendance Log</h3>
+            <table>
+                <tr>
+                    <th>Time In</th>
+                    <th>Time Out</th>
+                </tr>
+                <?php while ($row = $records->fetch_assoc()): ?>
                     <tr>
-                        <th>Time In</th>
-                        <th>Time Out</th>
+                        <td><?= $row['time_in'] ?></td>
+                        <td><?= $row['time_out'] ?: '-' ?></td>
                     </tr>
-                    <?php while ($row = $records->fetch_assoc()): ?>
-                        <tr>
-                            <td><?= $row['time_in'] ?></td>
-                            <td><?= $row['time_out'] ?: '-' ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </table>
-            </div>
+                <?php endwhile; ?>
+            </table>
         </div>
     </div>
 
