@@ -4,10 +4,10 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
-?>
 
-<?php
-// time_tracker.php
+
+// ✅ Set timezone to Philippines
+date_default_timezone_set("Asia/Manila");
 
 // Database connection
 $servername = "localhost";
@@ -23,12 +23,12 @@ if ($conn->connect_error) {
 }
 
 $message = "";
-$currentDate = date("l, F j, Y"); // Example: Friday, December 19, 2025
+$currentDate = date("l, F j, Y"); // Example: Tuesday, December 30, 2025
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_POST['action']; // "in" or "out"
-    $date   = date("Y-m-d");
-    $time   = date("Y-m-d H:i:s");
+    $date   = date("Y-m-d");     // today's date
+    $time   = date("Y-m-d H:i:s"); // current timestamp
 
     if ($action == "in") {
         // Insert new record for time in only if not already recorded today
@@ -55,11 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Fetch today's records
-$records = $conn->query("SELECT time_in, time_out FROM attendance WHERE date=CURDATE() ORDER BY id DESC");
+// ✅ Fetch today's records using PHP date (not CURDATE to avoid timezone mismatch)
+$today = date("Y-m-d");
+$records = $conn->query("SELECT time_in, time_out FROM attendance WHERE date='$today' ORDER BY id DESC");
 
 // Check if Time In already exists today
-$timeInExists = $conn->query("SELECT id FROM attendance WHERE date=CURDATE() AND time_in IS NOT NULL")->num_rows > 0;
+$timeInExists = $conn->query("SELECT id FROM attendance WHERE date='$today' AND time_in IS NOT NULL")->num_rows > 0;
 ?>
 
 
@@ -98,6 +99,8 @@ $timeInExists = $conn->query("SELECT id FROM attendance WHERE date=CURDATE() AND
         <div class="nav-links" id="navLinks">
             <a href="home.php">Home</a>
             <a href="welcome.php">Welcome</a>
+            <a href="update-time.php">Update Attendance</a>
+            <a href="delete-time.php">Delete Attendance</a>
             <a href="logout.php">Logout</a>
         </div>
     </nav>
