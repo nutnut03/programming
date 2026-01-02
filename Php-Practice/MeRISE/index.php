@@ -38,6 +38,25 @@
 )";
     echo $conn->query($sql_requests) ? "Table 'requests' created successfully<br>" : "Error creating requests table: " . $conn->error . "<br>";
 
+    $sql = "CREATE TABLE IF NOT EXISTS attendance(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    time_in DATETIME DEFAULT NULL,
+    time_out DATETIME DEFAULT NULL,
+    date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+
+    $sql = "CREATE TABLE IF NOT EXISTS attendance(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    time_in DATETIME DEFAULT NULL,
+    time_out DATETIME DEFAULT NULL,
+    date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+    echo $conn->query($sql) ? "Table users created successfully" : "Error: " . $conn->error;
+
     // ✅ If you want to ALTER table later, run separately:
     $alter = "ALTER TABLE requests 
     ADD COLUMN IF NOT EXISTS start_date DATE NULL,
