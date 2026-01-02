@@ -5,6 +5,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+// ✅ Set timezone to Philippines
 date_default_timezone_set("Asia/Manila");
 
 // Database connection
@@ -14,28 +15,14 @@ $password   = "";       // change if needed
 $dbname     = "MeRISE_DB";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$message = "";
-
-// ✅ Handle delete request
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
-    $id = $_POST['id'];
-
-    $stmt = $conn->prepare("DELETE FROM attendance WHERE id=?");
-    $stmt->bind_param("i", $id);
-    if ($stmt->execute()) {
-        $message = "✅ Attendance record deleted successfully!";
-    } else {
-        $message = "❌ Error deleting record: " . $conn->error;
-    }
-    $stmt->close();
-}
-
-// ✅ Fetch ALL records (not just today)
-$records = $conn->query("SELECT id, date, time_in, time_out 
+// ✅ Fetch ALL attendance records
+$records = $conn->query("SELECT id, time_in, time_out, date, created_at 
                          FROM attendance 
                          ORDER BY date DESC, id DESC");
 ?>
@@ -45,7 +32,8 @@ $records = $conn->query("SELECT id, date, time_in, time_out
 
 <head>
     <meta charset="UTF-8">
-    <title>Delete Attendance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Log</title>
     <link rel="stylesheet" href="merise-styles.css">
 </head>
 
@@ -83,57 +71,43 @@ $records = $conn->query("SELECT id, date, time_in, time_out
         </div>
     </nav>
 
-    <h1>Delete Attendance Records</h1>
-    <?php if ($message !== ""): ?>
-        <div class="message"><?= $message ?></div>
-    <?php endif; ?>
-
-    <table border="1" cellpadding="8">
-        <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Time In</th>
-            <th>Time Out</th>
-            <th>Action</th>
-        </tr>
-        <?php while ($row = $records->fetch_assoc()): ?>
+    <!-- ✅ Attendance Log Table -->
+    <div class="attendance-container">
+        <h1>📊 Full Attendance Log</h1>
+        <table>
             <tr>
-                <td><?= $row['id'] ?></td>
-                <td><?= $row['date'] ?></td>
-                <td><?= $row['time_in'] ?: '-' ?></td>
-                <td><?= $row['time_out'] ?: '-' ?></td>
-                <td>
-                    <form method="POST" action="" onsubmit="return confirm('Are you sure you want to delete this record?');">
-                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Time In</th>
+                <th>Time Out</th>
+                <th>Created At</th>
             </tr>
-        <?php endwhile; ?>
-    </table>
+            <?php while ($row = $records->fetch_assoc()): ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['date'] ?></td>
+                    <td><?= $row['time_in'] ?: '-' ?></td>
+                    <td><?= $row['time_out'] ?: '-' ?></td>
+                    <td><?= $row['created_at'] ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+    </div>
 
     <!-- ✅ Responsive Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-info">
                 <h3>MeRISE English Academy</h3>
-                <p>
-                    ESY Building, Corner Juana Osmeña St., Brgy. Kamputhaw, Cebu City
-                </p>
-                <p>
-                    <strong>Tel. (PLDT):</strong> (032) 345 8524 <br>
+                <p>ESY Building, Corner Juana Osmeña St., Brgy. Kamputhaw, Cebu City</p>
+                <p><strong>Tel. (PLDT):</strong> (032) 345 8524 <br>
                     <strong>Tel. (Globe):</strong> (032) 479 0414
                 </p>
-                <p>
-                    <strong>Email:</strong>
-                    <a href="mailto:academic_support@meriseinc.com">
-                        academic_support@meriseinc.com
-                    </a>
+                <p><strong>Email:</strong>
+                    <a href="mailto:academic_support@meriseinc.com">academic_support@meriseinc.com</a>
                 </p>
             </div>
-
         </div>
-
         <div class="footer-bottom">
             <p>© 2025 MeRISE English Academy. All rights reserved.</p>
         </div>

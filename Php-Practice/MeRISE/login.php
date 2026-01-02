@@ -36,31 +36,33 @@ if ($_POST) {
             <a href="home.php">Home</a>
             <a href="register.php">Register</a>
             <a href="login.php">Login</a>
-            <a href="welcome.php">Welcome</a>
-            <a href="logout.php">Logout</a>
+
         </div>
     </nav>
 
     <!-- ✅ Responsive Registration Form -->
     <div class="form-container">
-        <form method="post" class="register-form">
-            <h2>Login</h2>
+        <div class="container-box">
+            <form method="post" class="register-form">
+                <h2>Login</h2>
 
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
-            </div>
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
 
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
 
-            <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn">Login</button>
 
-            <p class="redirect">Already have an account? <a href="register.php">Register here</a></p>
-        </form>
+                <p class="redirect">Already have an account? <a href="register.php">Register here</a></p>
+            </form>
+        </div>
     </div>
+
     <!-- ✅ Responsive Footer -->
     <footer class="footer">
         <div class="footer-container">

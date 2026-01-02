@@ -5,7 +5,6 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-
 // ✅ Set timezone to Philippines
 date_default_timezone_set("Asia/Manila");
 
@@ -92,18 +91,39 @@ $timeInExists = $conn->query("SELECT id FROM attendance WHERE date='$today' AND 
 <body>
     <!-- Navigation -->
     <nav class="nav">
-        <div class="logo"><a href="https://www.facebook.com/MeRISEEnglishAcademyCebu"><img src="images/MeRISE-png.png"></a></div>
-        <div class=" menu-toggle" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+        <div class="logo">
+            <a href="https://www.facebook.com/MeRISEEnglishAcademyCebu">
+                <img src="images/MeRISE-png.png" alt="MeRISE Logo">
+            </a>
         </div>
         <div class="nav-links" id="navLinks">
             <a href="home.php">Home</a>
             <a href="welcome.php">Welcome</a>
-            <a href="update-time.php">Update Attendance</a>
-            <a href="delete-time.php">Delete Attendance</a>
+
+            <!-- Dropdown without arrow -->
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Attendance</a>
+                <div class="dropdown-content">
+                    <a href="attendance-logs.php">View Logs</a>
+                    <a href="update-time.php">Update Attendance</a>
+                    <a href="delete-time.php">Delete Attendance</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Request</a>
+                <div class="dropdown-content">
+                    <a href="request.php">Submit Request</a>
+                    <a href="view-requests.php">View My Requests</a>
+                </div>
+            </div>
+
+
             <a href="logout.php">Logout</a>
         </div>
     </nav>
+
+
+
 
 
     <!-- ✅ Responsive Welcome Box -->
