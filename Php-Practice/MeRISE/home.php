@@ -19,8 +19,6 @@
             <a href="home.php">Home</a>
             <a href="register.php">Register</a>
             <a href="login.php">Login</a>
-            <a href="welcome.php">Welcome</a>
-            <a href="logout.php">Logout</a>
         </div>
     </nav>
 
@@ -29,7 +27,7 @@
     <div class="home-box">
         <!-- COMPANY CONTENT -->
         <section class="section">
-            <h1>About Merise English Academy</h1>
+            <h1>Merise English Academy</h1>
             <p>MeRISE English Academy is a top-notch English Language School, formerly known as United Re-Growth Philippines Inc. Masters of Business English Academy (URG-MBA). It is a language academy specializing in General English, Business English, and Pronunciation teaching. It is the goal of the Academy to provide the best English language training for our students. Thus, the Academy requires instructors to undergo extensive teacher-training courses.
 
                 MeRISE English Academy is proud to say that all our instructors are highly trained and have certifications related to English language teaching. MeRISE faculty take into heart what students need. Headed by the Academic Team, our instructors are trained to provide lessons customized and tailored to fit students’ levels, needs, and requests.
