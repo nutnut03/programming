@@ -5,7 +5,7 @@
 $servername = "localhost";
 $username   = "root";   // change if needed
 $password   = "";       // change if needed
-$dbname     = "calculator_db";
+$dbname     = "MeRISE_DB";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
