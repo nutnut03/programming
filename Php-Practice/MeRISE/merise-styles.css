@@ -424,25 +424,27 @@ button[type="submit"] {
   }
 }
 
-/* ✅ Container styling */
+/* ===== Request Form Container ===== */
 .request-container {
-  margin-top: 100px;
   max-width: 600px;
-  background: #fff;
-  padding: 30px;
+  width: 95%; /* fluid width for responsiveness */
+  margin: 100px auto 40px; /* push down below navbar */
+  padding: 25px;
+  background: #ffffff;
   border-radius: 12px;
-  margin-left: auto;
-  margin-right: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* ✅ Title */
+/* Title */
 .request-container h1 {
   text-align: center;
   color: #2c3e50;
   margin-bottom: 20px;
+  font-size: clamp(1.4rem, 2vw, 2rem); /* scales with screen size */
 }
 
-/* ✅ Success & Error messages */
+/* Success & Error messages */
 .message {
   margin: 15px 0;
   padding: 12px;
@@ -451,6 +453,7 @@ button[type="submit"] {
   color: #fff;
   text-align: center;
   font-weight: bold;
+  transition: opacity 0.5s ease;
 }
 .error {
   margin: 15px 0;
@@ -462,7 +465,7 @@ button[type="submit"] {
   font-weight: bold;
 }
 
-/* ✅ Form styling */
+/* Form styling */
 .request-container form {
   display: flex;
   flex-direction: column;
@@ -472,6 +475,7 @@ button[type="submit"] {
 .request-container label {
   font-weight: bold;
   color: #34495e;
+  font-size: 0.95rem;
 }
 
 .request-container select,
@@ -480,8 +484,9 @@ button[type="submit"] {
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 1rem;
   transition: border-color 0.3s;
+  width: 100%; /* full width */
 }
 
 .request-container select:focus,
@@ -491,13 +496,13 @@ button[type="submit"] {
   outline: none;
 }
 
-/* ✅ Textarea */
+/* Textarea */
 .request-container textarea {
   resize: vertical;
   min-height: 80px;
 }
 
-/* ✅ Submit button */
+/* Submit button */
 .request-container button {
   background: #3498db;
   color: #fff;
@@ -505,12 +510,38 @@ button[type="submit"] {
   padding: 12px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   transition: background 0.3s;
 }
-
 .request-container button:hover {
   background: #2980b9;
+}
+
+/* ===== Responsive Layout ===== */
+@media (max-width: 768px) {
+  .request-container {
+    padding: 20px;
+  }
+  .request-container h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .request-container {
+    margin: 80px auto 20px;
+    padding: 15px;
+  }
+  .request-container h1 {
+    font-size: 1.3rem;
+  }
+  .request-container label {
+    font-size: 0.85rem;
+  }
+  .request-container button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }
 
 .status-pending {
