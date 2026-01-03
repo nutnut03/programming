@@ -38,15 +38,7 @@
 )";
     echo $conn->query($sql_requests) ? "Table 'requests' created successfully<br>" : "Error creating requests table: " . $conn->error . "<br>";
 
-    $sql = "CREATE TABLE IF NOT EXISTS attendance(
-  id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    time_in DATETIME DEFAULT NULL,
-    time_out DATETIME DEFAULT NULL,
-    date DATE NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)";
-
+    // ✅ Create attendance table
     $sql = "CREATE TABLE IF NOT EXISTS attendance(
   id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
