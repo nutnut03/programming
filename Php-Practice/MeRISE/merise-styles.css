@@ -1,24 +1,22 @@
-/* ===== Reset & Base ===== */ * {
+/* ===== Reset & Base ===== */
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif
 }
 
 body {
   background: #f4f6f9;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.6
 }
 
-/* ===== Background Section ===== */
+/* ===== Background ===== */
 .bg {
-  background-image: url("images/MeRISE-Main.jpg");
+  background: url("images/MeRISE-Main.jpg") center/cover no-repeat;
   height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+  position: relative
 }
 
 /* ===== Navbar ===== */
@@ -27,23 +25,23 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: #ffffff;
+  background: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+  z-index: 1000
 }
 
 .nav .logo img {
-  height: 40px;
+  height: 40px
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 20px
 }
 
 .nav-links a,
@@ -52,20 +50,20 @@ body {
   text-decoration: none;
   font-weight: 500;
   padding: 10px 15px;
-  transition: background 0.3s, color 0.3s;
+  transition: .3s
 }
 
 .nav-links a:hover,
 .dropbtn:hover {
   background: #d23339;
   border-radius: 4px;
-  color: #fff;
+  color: #fff
 }
 
-/* Dropdown */
 .dropdown {
-  position: relative;
+  position: relative
 }
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -74,84 +72,83 @@ body {
   background: #34495e;
   min-width: 180px;
   border-radius: 4px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .2)
 }
+
 .dropdown-content a {
   display: block;
   padding: 10px 15px;
-  color: #ecf0f1;
-}
-.dropdown-content a:hover {
-  background: #388e3c;
-  color: #fff;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
+  color: #ecf0f1
 }
 
-/* Outer container centers everything */
+.dropdown-content a:hover {
+  background: #388e3c;
+  color: #fff
+}
+
+.dropdown:hover .dropdown-content {
+  display: block
+}
+
+/* ===== Form Box ===== */
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* full screen height */
-  background: linear-gradient(135deg, #d23339, #d23339);
-  padding: 20px;
+  min-height: 100vh;
+  background: #d23339;
+  padding: 20px
 }
 
-/* Box wrapper */
 .container-box {
-  background: #ffffff;
+  background: #fff;
   padding: 40px 50px;
   border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
   max-width: 450px;
   width: 100%;
-  margin: auto;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: .3s
 }
 
-/* Hover effect */
 .container-box:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, .2)
 }
 
-/* Form heading */
 .register-form h2 {
   color: #d23339;
   margin-bottom: 25px;
-  font-size: 2rem;
-  letter-spacing: 1px;
+  font-size: 2rem
 }
 
-/* Input groups */
 .input-group {
-  text-align: left;
   margin-bottom: 20px;
+  text-align: left
 }
+
 .input-group label {
   display: block;
   font-weight: 600;
   margin-bottom: 6px;
-  color: #333;
+  color: #333
 }
+
 .input-group input {
   width: 100%;
   padding: 12px;
   border: 2px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
-  transition: 0.3s;
-}
-.input-group input:focus {
-  border-color: #4caf50;
-  outline: none;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+  transition: .3s
 }
 
-/* Buttons */
+.input-group input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, .4);
+  outline: none
+}
+
 .btn {
   background: #d23339;
   color: #fff;
@@ -161,326 +158,243 @@ body {
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
-}
-.btn:hover {
-  background: #388e3c;
+  transition: .3s
 }
 
-/* Redirect link */
+.btn:hover {
+  background: #388e3c
+}
+
 .redirect {
   margin-top: 15px;
-  font-size: 0.95rem;
+  font-size: .95rem
 }
+
 .redirect a {
   color: #d23339;
-  font-weight: 600;
+  font-weight: 600
 }
+
 .redirect a:hover {
-  text-decoration: underline;
+  text-decoration: underline
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .container-box {
-    padding: 30px;
-  }
-  .register-form h2 {
-    font-size: 1.7rem;
-  }
-}
-@media (max-width: 480px) {
-  .container-box {
-    padding: 20px;
-  }
-  .register-form h2 {
-    font-size: 1.5rem;
-  }
-  .input-group input,
-  .btn {
-    font-size: 0.95rem;
-  }
-}
-
-/* ===== Attendance Tables ===== */
+/* ===== Attendance Table ===== */
 table {
   width: 85%;
   margin: 20px auto;
   border-collapse: collapse;
   background: #fff;
   border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .1)
 }
 
-/* Table cells */
 table th,
 table td {
   padding: 12px 15px;
   text-align: center;
-  border-bottom: 1px solid #ddd; /* ✅ only horizontal line */
-  border-right: none; /* ✅ remove vertical line */
-  border-left: none; /* ✅ remove vertical line */
+  border-bottom: 1px solid #ddd
 }
 
-/* Table header */
 table th {
   background: #2c3e50;
   color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  text-transform: uppercase
 }
 
-/* Row hover effect */
 table tr:hover {
-  background: #f1f1f1;
+  background: #f1f1f1
 }
 
-button[type="submit"] {
+button[type=submit] {
   background: #d23339;
   color: #fff;
   border: none;
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: .3s
 }
 
-/* Messages */
-.message {
-  text-align: center;
-  padding: 10px;
-  margin: 15px auto;
-  width: 60%;
-  border-radius: 6px;
-  font-weight: bold;
+button[type=submit]:hover {
+  background: #388e3c
 }
+
+/* ===== Messages ===== */
+.message,
+.error {
+  margin: 15px auto;
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  width: 60%
+}
+
+.message {
+  background: #ecf0f1;
+  color: #2c3e50
+}
+
 .message.success {
   background: #d4edda;
-  color: #155724;
+  color: #155724
 }
+
 .message.error {
   background: #f8d7da;
-  color: #721c24;
+  color: #721c24
+}
+
+.error {
+  background: #e74c3c;
+  color: #fff
 }
 
 /* ===== Footer ===== */
 .footer {
-  background: linear-gradient(135deg, #d23339, #d23339);
+  background: #d23339;
   color: #fff;
   padding: 40px 20px 10px;
   margin-top: 50px;
-  text-align: center;
+  text-align: center
 }
+
 .footer-info h3 {
   font-size: 1.6rem;
-  margin-bottom: 10px;
+  margin-bottom: 10px
 }
+
 .footer-info p {
-  font-size: 0.95rem;
+  font-size: .95rem;
   line-height: 1.6;
-  margin-bottom: 10px;
+  margin-bottom: 10px
 }
+
 .footer-info a {
-  color: #c8e6c9;
+  color: #c8e6c9
 }
+
 .footer-info a:hover {
-  color: #fff;
+  color: #fff
 }
+
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, .3);
   margin-top: 30px;
-  padding-top: 15px;
+  padding-top: 15px
 }
+
 .footer-bottom p {
-  font-size: 0.9rem;
-  opacity: 0.9;
+  font-size: .9rem;
+  opacity: .9
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  .form-box {
-    padding: 30px 25px;
-  }
-  .form-box h2 {
-    font-size: 1.7rem;
-  }
-  table {
-    width: 95%;
-  }
-}
-@media (max-width: 480px) {
-  .form-box {
-    padding: 25px 20px;
-  }
-  .form-box h2 {
-    font-size: 1.5rem;
-  }
-  .input-group input,
-  .btn {
-    font-size: 0.95rem;
-  }
-  table th,
-  table td {
-    font-size: 0.85rem;
-    padding: 8px;
-  }
-}
-
-/* ===== Welcome Section ===== */
-/* ===== HOME BOX ===== */
+/* ===== Boxes ===== */
 .home-box,
 .welcome-box {
   width: 95%;
-  margin: 20px auto 20px;
+  margin: 20px auto;
   background: #fff;
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .2)
 }
+
 .home-box h1,
 .welcome-box h1 {
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 15px
 }
+
 .home-box p,
 .welcome-box p {
   color: #555;
   margin: 10px 0;
-  font-size: 1.1rem;
+  font-size: 1.1rem
 }
 
 .welcome-container {
   display: flex;
   justify-content: center;
-  height: 70vh;
   align-items: center;
-  background: linear-gradient(135deg, #d23339, #d23339);
-  padding: 20px;
+  height: 70vh;
+  background: #d23339;
+  padding: 20px
 }
 
-/* ===== Welcome Box Card ===== */
 .welcome-box {
-  background: #ffffff;
-  color: #333;
-  text-align: center;
   padding: 40px 60px;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
   max-width: 800px;
-  width: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  transition: .3s
 }
 
 .welcome-box:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, .25)
 }
 
 .welcome-box h1 {
   font-size: 2rem;
   margin-bottom: 15px;
-  color: #d23339;
+  color: #d23339
 }
 
-.welcome-box p {
-  font-size: 1.1rem;
-  margin: 10px 0;
-}
-
-/* ===== Responsive Styles ===== */
-@media (max-width: 768px) {
-  .welcome-box {
-    padding: 30px 20px;
-  }
-
-  .welcome-box h1 {
-    font-size: 1.6rem;
-  }
-
-  .welcome-box p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .welcome-container {
-    height: auto;
-    padding: 50px 10px;
-  }
-
-  .welcome-box {
-    border-radius: 12px;
-    padding: 25px 15px;
-  }
-
-  .welcome-box h1 {
-    font-size: 1.4rem;
-  }
-
-  .welcome-box p {
-    font-size: 0.95rem;
-  }
-}
-
-/* Form Container */
+/* ===== Form ===== */
 form {
   max-width: 500px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #ffffff;
+  background: #fff;
   border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .1)
 }
 
-/* Labels */
 form label {
   display: block;
-  margin: 1rem 0 0.4rem;
+  margin: 1rem 0 .4rem;
   font-weight: 600;
-  color: #004080;
+  color: #004080
 }
 
-/* Inputs, Select, Textarea */
 form input,
 form select,
 form textarea {
   width: 100%;
-  padding: 0.7rem;
+  padding: .7rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 0.95rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: .95rem;
+  transition: .3s
 }
 
 form input:focus,
 form select:focus,
 form textarea:focus {
   border-color: #004080;
-  box-shadow: 0 0 5px rgba(0, 64, 128, 0.3);
-  outline: none;
+  box-shadow: 0 0 5px rgba(0, 64, 128, .3);
+  outline: none
 }
 
-/* Textarea */
 form textarea {
   min-height: 100px;
-  resize: vertical;
+  resize: vertical
 }
 
-/* Extra Fields Section */
 #extra-fields {
   margin-top: 1rem;
   padding: 1rem;
   background: #f9f9f9;
   border: 1px solid #e0e0e0;
-  border-radius: 6px;
+  border-radius: 6px
 }
 
-/* Submit Button */
 form button {
-  display: block;
   width: 100%;
-  padding: 0.9rem;
+  padding: .9rem;
   margin-top: 1.5rem;
   background: #004080;
   color: #fff;
@@ -489,75 +403,132 @@ form button {
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: .3s
 }
 
 form button:hover {
-  background: #003366;
+  background: #003366
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  form {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-}
+/* ===== Status & Buttons ===== */
 .status-pending {
   color: #f39c12;
-  font-weight: bold;
+  font-weight: bold
 }
+
 .status-approved {
   color: #27ae60;
-  font-weight: bold;
+  font-weight: bold
 }
+
 .status-rejected {
   color: #e74c3c;
-  font-weight: bold;
+  font-weight: bold
+}
+
+.btn-approve,
+.btn-reject {
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: .3s
 }
 
 .btn-approve {
-  background: #27ae60;
-  color: #fff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
+  background: #27ae60
 }
+
 .btn-approve:hover {
-  background: #1e8449;
+  background: #1e8449
 }
 
 .btn-reject {
-  background: #e74c3c;
+  background: #e74c3c
+}
+
+.btn-reject:hover {
+  background: #c0392b
+}
+
+/* Delete Button */
+.btn-delete {
+  background: #e74c3c;   /* red */
   color: #fff;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
+  font-weight: 600;
+  transition: background 0.3s ease;
 }
-.btn-reject:hover {
-  background: #c0392b;
-}
-
-.message {
-  margin: 15px 0;
-  padding: 12px;
-  border-radius: 6px;
-  background: #ecf0f1;
-  color: #2c3e50;
-  text-align: center;
-  font-weight: bold;
+.btn-delete:hover {
+  background: #c0392b;   /* darker red on hover */
 }
 
-.error {
-  margin: 15px 0;
-  padding: 12px;
-  border-radius: 6px;
-  background: #e74c3c;
-  color: #fff;
-  text-align: center;
-  font-weight: bold;
+
+/* ===== Responsive ===== */
+@media(max-width:768px) {
+  .container-box {
+    padding: 30px
+  }
+
+  .register-form h2 {
+    font-size: 1.7rem
+  }
+
+  table {
+    width: 95%
+  }
+
+  .welcome-box {
+    padding: 30px 20px
+  }
+
+  .welcome-box h1 {
+    font-size: 1.6rem
+  }
+}
+
+@media(max-width:480px) {
+  .container-box {
+    padding: 20px
+  }
+
+  .register-form h2 {
+    font-size: 1.5rem
+  }
+
+  .input-group input,
+  .btn {
+    font-size: .95rem
+  }
+
+  table th,
+  table td {
+    font-size: .85rem;
+    padding: 8px
+  }
+
+  .welcome-container {
+    height: auto;
+    padding: 50px 10px
+  }
+
+  .welcome-box {
+    padding: 25px 15px;
+    border-radius: 12px
+  }
+
+  .welcome-box h1 {
+    font-size: 1.4rem
+  }
+}
+
+@media(max-width:600px) {
+  form {
+    margin: 1rem;
+    padding: 1.5rem
+  }
 }
