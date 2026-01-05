@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="time.css">
 </head>
 <?php
-$conn = new mysqli("localhost", "root", "", "calculator_db");
+$conn = new mysqli("localhost", "root", "", "MeRISE_DB");
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 echo "Connected successfully<br>";
 

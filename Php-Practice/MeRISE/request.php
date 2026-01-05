@@ -79,6 +79,22 @@ $conn->close();
 
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
+        toggleFields(); // run on page load
+
+        // Auto-hide success message after 5 seconds
+        const msg = document.querySelector(".message");
+        if (msg) {
+            setTimeout(() => {
+                msg.style.opacity = "0";
+            }, 5000);
+        }
+
+        // Highlight dropdown when changed
+        const selectBox = document.querySelector("select[name='request_type']");
+        if (selectBox) {
+            selectBox.addEventListener("change", () => {
+                selectBox.style.borderColor = "#3498db";
+            });
         }
     </script>
 
