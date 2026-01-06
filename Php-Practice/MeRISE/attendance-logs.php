@@ -49,6 +49,7 @@ $records = $conn->query("SELECT id,time_in,time_out,date,created_at FROM attenda
                 <th>Time In</th>
                 <th>Time Out</th>
                 <th>Created At</th>
+                <th>Actions</th>
             </tr>
             <?php while ($r = $records->fetch_assoc()): ?>
                 <tr>
@@ -57,8 +58,13 @@ $records = $conn->query("SELECT id,time_in,time_out,date,created_at FROM attenda
                     <td><?= $r['time_in'] ?: '-' ?></td>
                     <td><?= $r['time_out'] ?: '-' ?></td>
                     <td><?= $r['created_at'] ?></td>
+                    <td>
+                        <a href="update-time.php?id=<?= $r['id'] ?>" class="btn btn-update">Update</a>
+                        <a href="delete-time.php?id=<?= $r['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                    </td>
                 </tr>
             <?php endwhile; ?>
+
         </table>
     </div>
 

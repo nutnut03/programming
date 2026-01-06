@@ -627,6 +627,71 @@ form button:hover {
 .btn-reject:hover {
   background: #c0392b
 }
+/* Base button style */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Update button */
+.btn-update {
+    background-color: #3498db; /* blue */
+    color: #fff;
+    border: 1px solid #2980b9;
+}
+.btn-update:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Delete button */
+.btn-delete {
+    background-color: #e74c3c; /* red */
+    color: #fff;
+    border: 1px solid #c0392b;
+}
+.btn-delete:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Update button */
+.btn-update {
+    background-color: #3498db;
+    color: #fff;
+    border: 1px solid #2980b9;
+}
+.btn-update:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Delete button */
+.btn-delete {
+    background-color: #e74c3c;
+    color: #fff;
+    border: 1px solid #c0392b;
+}
+.btn-delete:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
 
 /* Delete Button */
 .btn-delete {

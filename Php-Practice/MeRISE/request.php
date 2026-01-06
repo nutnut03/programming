@@ -12,13 +12,26 @@ if ($conn->connect_error) die("DB Error");
 $message = "";
 if ($_POST) {
     $stmt = $conn->prepare("INSERT INTO requests(username,request_type,description,start_date,end_date,hours,date_requested) VALUES(?,?,?,?,?,?,?)");
-    $stmt->bind_param("ssssdds", $_SESSION['username'], $_POST['request_type'], trim($_POST['description']), $_POST['start_date'] ?: null, $_POST['end_date'] ?: null, $_POST['hours'] !== "" ? (float)$_POST['hours'] : null, date("Y-m-d"));
+
+    // Assign variables for clarity
+    $username   = $_SESSION['username'];
+    $type       = $_POST['request_type'];
+    $desc       = trim($_POST['description']);
+    $start      = !empty($_POST['start_date']) ? $_POST['start_date'] : null;
+    $end        = !empty($_POST['end_date']) ? $_POST['end_date'] : null;
+    $hours      = ($_POST['hours'] !== "") ? (float)$_POST['hours'] : null;
+    $dateReq    = date("Y-m-d");
+
+    // Correct type string: 5 strings, 1 double, 1 string
+    $stmt->bind_param("sssssds", $username, $type, $desc, $start, $end, $hours, $dateReq);
+
     $stmt->execute();
     $stmt->close();
     $message = "✅ Request submitted successfully!";
 }
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,24 +92,26 @@ $conn->close();
 
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
-        toggleFields(); // run on page load
+            toggleFields(); // run on page load
 
-        // Auto-hide success message after 5 seconds
-        const msg = document.querySelector(".message");
-        if (msg) {
-            setTimeout(() => {
-                msg.style.opacity = "0";
-            }, 5000);
-        }
+            // Auto-hide success message after 5 seconds
+            const msg = document.querySelector(".message");
+            if (msg) {
+                setTimeout(() => {
+                    msg.style.opacity = "0";
+                }, 5000);
+            }
 
-        // Highlight dropdown when changed
-        const selectBox = document.querySelector("select[name='request_type']");
-        if (selectBox) {
-            selectBox.addEventListener("change", () => {
-                selectBox.style.borderColor = "#3498db";
-            });
-        }
+            // Highlight dropdown when changed
+            const selectBox = document.querySelector("select[name='request_type']");
+            if (selectBox) {
+                selectBox.addEventListener("change", () => {
+                    selectBox.style.borderColor = "#3498db";
+                });
+            }
+        } // ✅ properly closed function
     </script>
+
 
     <footer class="footer">
         <div class="footer-container">

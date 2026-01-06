@@ -9,21 +9,26 @@ $conn = new mysqli("localhost", "root", "", "MeRISE_DB");
 if ($conn->connect_error) die("DB Error");
 
 $id = intval($_GET['id']);
-$result = $conn->query("SELECT * FROM attendance WHERE id=$id");
-$record = $result->fetch_assoc();
+$username = $_SESSION['username'];
+$result = $conn->query("SELECT * FROM requests WHERE id=$id AND username='$username'");
+$request = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $time_in = $_POST['time_in'];
-    $time_out = $_POST['time_out'];
-    $date = $_POST['date'];
+    $type = $_POST['request_type'];
+    $desc = $_POST['description'];
+    $start = $_POST['start_date'];
+    $end = $_POST['end_date'];
+    $hours = $_POST['hours'];
 
-    $conn->query("UPDATE attendance SET 
-        time_in='$time_in',
-        time_out='$time_out',
-        date='$date'
-        WHERE id=$id");
+    $conn->query("UPDATE requests SET 
+        request_type='$type',
+        description='$desc',
+        start_date='$start',
+        end_date='$end',
+        hours='$hours'
+        WHERE id=$id AND username='$username'");
 
-    header("Location: attendance-logs.php");
+    header("Location: view-requests.php");
     exit();
 }
 ?>
@@ -31,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 
 <head>
-    <title>Update Attendance</title>
+    <title>Update Request</title>
     <link rel="stylesheet" href="merise-styles.css">
 </head>
 
@@ -53,15 +58,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="logout.php">Logout</a>
         </div>
     </nav>
-    <h1>Update Attendance Record</h1>
+
+    <h1>Update Request</h1>
     <form method="post">
-        <label>Date:</label>
-        <input type="date" name="date" value="<?= $record['date'] ?>"><br>
-        <label>Time In:</label>
-        <input type="time" name="time_in" value="<?= $record['time_in'] ?>"><br>
-        <label>Time Out:</label>
-        <input type="time" name="time_out" value="<?= $record['time_out'] ?>"><br>
-        <button type="submit" class="btn btn-update">Save Changes</button>
+        <label>Type:</label><input type="text" name="request_type" value="<?= $request['request_type'] ?>"><br>
+        <label>Description:</label><input type="text" name="description" value="<?= $request['description'] ?>"><br>
+        <label>Start Date:</label><input type="date" name="start_date" value="<?= $request['start_date'] ?>"><br>
+        <label>End Date:</label><input type="date" name="end_date" value="<?= $request['end_date'] ?>"><br>
+        <label>Hours:</label><input type="number" name="hours" value="<?= $request['hours'] ?>"><br>
+        <button type="submit">Save Changes</button>
     </form>
 </body>
 

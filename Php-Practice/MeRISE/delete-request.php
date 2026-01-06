@@ -10,8 +10,11 @@ if ($conn->connect_error) die("DB Error");
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
-    $conn->query("DELETE FROM attendance WHERE id=$id");
+    $username = $_SESSION['username'];
+
+    // Only delete if request belongs to logged-in user
+    $conn->query("DELETE FROM requests WHERE id=$id AND username='$username'");
 }
 
-header("Location: attendance-logs.php");
+header("Location: view-requests.php");
 exit();

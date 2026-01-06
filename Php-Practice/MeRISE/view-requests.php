@@ -47,6 +47,7 @@ $result = $conn->query("SELECT * FROM requests WHERE username='{$_SESSION['usern
                 <th>Hours</th>
                 <th>Date Requested</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
             <?php while ($r = $result->fetch_assoc()): ?>
                 <tr>
@@ -57,9 +58,14 @@ $result = $conn->query("SELECT * FROM requests WHERE username='{$_SESSION['usern
                     <td><?= $r['hours'] ?: '-' ?></td>
                     <td><?= $r['date_requested'] ?></td>
                     <td><?= $r['status'] ?></td>
+                    <td>
+                        <a href="update-request.php?id=<?= $r['id'] ?>" class="btn btn-update">Update</a>
+                        <a href="delete-request.php?id=<?= $r['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this request?');">Delete</a>
+                    </td>
+
                 </tr>
             <?php endwhile; ?>
-        </table>
+
     </div>
 
     <script>
