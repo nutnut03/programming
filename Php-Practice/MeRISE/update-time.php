@@ -6,25 +6,36 @@ if (!isset($_SESSION['username'])) {
 }
 
 $conn = new mysqli("localhost", "root", "", "MeRISE_DB");
-if ($conn->connect_error) die("DB Error");
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
+}
 
 $id = intval($_GET['id']);
-$result = $conn->query("SELECT * FROM attendance WHERE id=$id");
+$stmt = $conn->prepare("SELECT * FROM attendance WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 $record = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $time_in = $_POST['time_in'];
-    $time_out = $_POST['time_out'];
-    $date = $_POST['date'];
+    $time_in  = $_POST['time_in'] ?? null;
+    $time_out = $_POST['time_out'] ?? null;
+    $date     = $_POST['date'] ?? null;
 
-    $conn->query("UPDATE attendance SET 
-        time_in='$time_in',
-        time_out='$time_out',
-        date='$date'
-        WHERE id=$id");
+    // Basic validation
+    if ($time_in && $date) {
+        $update = $conn->prepare("UPDATE attendance SET time_in = ?, time_out = ?, date = ? WHERE id = ?");
+        $update->bind_param("sssi", $time_in, $time_out, $date, $id);
 
-    header("Location: attendance-logs.php");
-    exit();
+        if ($update->execute()) {
+            header("Location: attendance-logs.php");
+            exit();
+        } else {
+            echo "Error updating record: " . $update->error;
+        }
+    } else {
+        echo "Please fill in required fields.";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -37,30 +48,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <nav class="nav">
-        <div class="logo"><a href="https://www.facebook.com/MeRISEEnglishAcademyCebu"><img src="images/MeRISE-png.png"></a></div>
+        <div class="logo">
+            <a href="https://www.facebook.com/MeRISEEnglishAcademyCebu">
+                <img src="images/MeRISE-png.png" alt="MeRISE Logo">
+            </a>
+        </div>
         <div class="nav-links" id="navLinks">
-            <a href="home.php">Home</a><a href="welcome.php">Welcome</a>
-            <div class="dropdown"><a href="#" class="dropbtn">Attendance</a>
+            <a href="home.php">Home</a>
+            <a href="welcome.php">Welcome</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Attendance</a>
                 <div class="dropdown-content">
-                    <a href="attendance-logs.php">View Logs</a><a href="update-time.php">Update</a><a href="delete-time.php">Delete</a>
+                    <a href="attendance-logs.php">View Logs</a>
+                    <a href="update-time.php">Update</a>
+                    <a href="delete-time.php">Delete</a>
                 </div>
             </div>
-            <div class="dropdown"><a href="#" class="dropbtn">Request</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">Request</a>
                 <div class="dropdown-content">
-                    <a href="request.php">Submit</a><a href="view-requests.php">My Requests</a>
+                    <a href="request.php">Submit</a>
+                    <a href="view-requests.php">My Requests</a>
                 </div>
             </div>
             <a href="logout.php">Logout</a>
         </div>
     </nav>
+
     <h1>Update Attendance Record</h1>
     <form method="post">
         <label>Date:</label>
-        <input type="date" name="date" value="<?= $record['date'] ?>"><br>
+        <input type="date" name="date" value="<?= htmlspecialchars($record['date']) ?>"><br>
         <label>Time In:</label>
-        <input type="time" name="time_in" value="<?= $record['time_in'] ?>"><br>
+        <input type="time" name="time_in" value="<?= $record['time_in'] ? date('H:i', strtotime($record['time_in'])) : '' ?>"><br>
         <label>Time Out:</label>
-        <input type="time" name="time_out" value="<?= $record['time_out'] ?>"><br>
+        <input type="time" name="time_out" value="<?= $record['time_out'] ? date('H:i', strtotime($record['time_out'])) : '' ?>"><br>
         <button type="submit" class="btn btn-update">Save Changes</button>
     </form>
 </body>

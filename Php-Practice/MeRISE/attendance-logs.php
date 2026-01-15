@@ -4,6 +4,29 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $time_in  = $_POST['time_in'] ?? null;
+    $time_out = $_POST['time_out'] ?? null;
+
+    if ($time_in)  $time_in  = date("Y-m-d H:i:s", strtotime($time_in));
+    if ($time_out) $time_out = date("Y-m-d H:i:s", strtotime($time_out));
+
+    if ($time_in) {
+        $update = $conn->prepare("UPDATE attendance SET time_in = ?, time_out = ? WHERE id = ?");
+        $update->bind_param("ssi", $time_in, $time_out, $id);
+
+        if ($update->execute()) {
+            header("Location: attendance-logs.php");
+            exit();
+        } else {
+            echo "Error updating record: " . $update->error;
+        }
+    } else {
+        echo "Please provide at least Time In.";
+    }
+}
+
 date_default_timezone_set("Asia/Manila");
 
 $conn = new mysqli("localhost", "root", "", "MeRISE_DB");
@@ -54,13 +77,19 @@ $records = $conn->query("SELECT id,time_in,time_out,date,created_at FROM attenda
             <?php while ($r = $records->fetch_assoc()): ?>
                 <tr>
                     <td><?= $r['id'] ?></td>
-                    <td><?= $r['date'] ?></td>
-                    <td><?= $r['time_in'] ?: '-' ?></td>
-                    <td><?= $r['time_out'] ?: '-' ?></td>
-                    <td><?= $r['created_at'] ?></td>
+                    <td><?= date("M d, Y", strtotime($r['date'])) ?></td>
+                    <td>
+                        <?= $r['time_in'] ? date("h:i A", strtotime($r['time_in'])) : '-' ?>
+                    </td>
+                    <td>
+                        <?= $r['time_out'] ? date("h:i A", strtotime($r['time_out'])) : '-' ?>
+                    </td>
+
+                    <td><?= date("M d, Y h:i A", strtotime($r['created_at'])) ?></td>
                     <td>
                         <a href="update-time.php?id=<?= $r['id'] ?>" class="btn btn-update">Update</a>
-                        <a href="delete-time.php?id=<?= $r['id'] ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                        <a href="delete-time.php?id=<?= $r['id'] ?>" class="btn btn-delete"
+                            onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
