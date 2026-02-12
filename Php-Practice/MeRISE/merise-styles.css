@@ -426,7 +426,7 @@ form select:focus,
 form textarea:focus {
   border-color: #004080;
   box-shadow: 0 0 5px rgba(0, 64, 128, .3);
-  outline: none
+  outline: none;
 @media (max-width: 480px) {
   .welcome-container {
     height: auto;
