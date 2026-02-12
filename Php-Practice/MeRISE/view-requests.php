@@ -16,6 +16,7 @@ $result = $conn->query("SELECT * FROM requests WHERE username='{$_SESSION['usern
     <title>My Requests</title>
     <link rel="stylesheet" href="merise-styles.css">
 </head>
+;f;lf;dhl;plg
 
 <body>
     <nav class="nav">
@@ -65,6 +66,7 @@ $result = $conn->query("SELECT * FROM requests WHERE username='{$_SESSION['usern
 
                 </tr>
             <?php endwhile; ?>
+        </table>
     </div>
 
     <footer class="footer">
@@ -78,19 +80,6 @@ $result = $conn->query("SELECT * FROM requests WHERE username='{$_SESSION['usern
             <p>© 2025 MeRISE English Academy. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        const rows = document.querySelectorAll(".requests-container table tr");
-        rows.forEach(r => {
-            r.onmouseenter = () => r.style.background = "#eaf2f8";
-            r.onmouseleave = () => r.style.background = "";
-        });
-
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-    </script>
-
 
 </body>
 
