@@ -65,8 +65,8 @@ $result = $conn->query("SELECT * FROM requests WHERE username='{$_SESSION['usern
 
                 </tr>
             <?php endwhile; ?>
-
     </div>
+
     <footer class="footer">
         <div class="footer-container">
             <h3>MeRISE English Academy</h3>

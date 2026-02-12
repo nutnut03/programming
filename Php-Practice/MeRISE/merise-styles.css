@@ -509,48 +509,7 @@ form textarea:focus {
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: border-color 0.3s;
-  width: 100%; /* full width */
-}
-
-form textarea {
-  min-height: 100px;
-  resize: vertical
-}
-
-#extra-fields {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px
-}
-
-form button {
-  width: 100%;
-  padding: .9rem;
-  margin-top: 1.5rem;
-  background: #004080;
-/* Textarea */
-.request-container textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-/* Submit button */
-.request-container button {
-  background: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: .3s
-}
-
-form button:hover {
-  background: #003366
-}
+  width: 100
 
 /* ===== Status & Buttons ===== */
   font-size: 1rem;
@@ -773,3 +732,5 @@ form button:hover {
     padding: 1.5rem
   }
 }
+
+
