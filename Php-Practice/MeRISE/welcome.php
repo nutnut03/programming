@@ -14,22 +14,44 @@ $today = date("Y-m-d");
 $time = date("Y-m-d H:i:s");
 
 if ($_POST) {
+    // Get user_id from session username
+    $stmt = $conn->prepare("SELECT id FROM users WHERE username=?");
+    $stmt->bind_param("s", $_SESSION['username']);
+    $stmt->execute();
+    $stmt->bind_result($user_id);
+    $stmt->fetch();
+    $stmt->close();
+
     if ($_POST['action'] == "in") {
-        if ($conn->query("SELECT id FROM attendance WHERE date='$today' AND time_in IS NOT NULL")->num_rows == 0) {
-            $stmt = $conn->prepare("INSERT INTO attendance(time_in,date) VALUES(?,?)");
-            $stmt->bind_param("ss", $time, $today);
+        // Check if already timed in today
+        $stmt = $conn->prepare("SELECT id FROM attendance WHERE user_id=? AND date=? AND time_in IS NOT NULL");
+        $stmt->bind_param("is", $user_id, $today);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows == 0) {
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO attendance(user_id, time_in, date) VALUES(?,?,?)");
+            $stmt->bind_param("iss", $user_id, $time, $today);
             $stmt->execute();
             $stmt->close();
             $message = "✅ Time In recorded at $time";
-        } else $message = "⚠️ Time In already recorded today.";
+        } else {
+            $message = "⚠️ Time In already recorded today.";
+        }
     } else {
-        $stmt = $conn->prepare("UPDATE attendance SET time_out=? WHERE date=? AND time_out IS NULL ORDER BY id DESC LIMIT 1");
-        $stmt->bind_param("ss", $time, $today);
+        // Update latest record for this user
+        $stmt = $conn->prepare("UPDATE attendance 
+                                SET time_out=? 
+                                WHERE user_id=? AND date=? AND time_out IS NULL 
+                                ORDER BY id DESC LIMIT 1");
+        $stmt->bind_param("sis", $time, $user_id, $today);
         $stmt->execute();
         $stmt->close();
         $message = "✅ Time Out recorded at $time";
     }
 }
+
 $records = $conn->query("SELECT time_in,time_out FROM attendance WHERE date='$today' ORDER BY id DESC");
 $timeInExists = $conn->query("SELECT id FROM attendance WHERE date='$today' AND time_in IS NOT NULL")->num_rows > 0;
 ?>

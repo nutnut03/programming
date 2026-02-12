@@ -1,7 +1,22 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "MeRISE_DB");
-if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+// Connect to MySQL server (without specifying database first)
+$conn = new mysqli("localhost", "root", "");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+// Create database if it doesn't exist
+$dbName = "MeRISE_DB";
+if ($conn->query("CREATE DATABASE IF NOT EXISTS $dbName") === TRUE) {
+    echo "Database '$dbName' is ready<br>";
+} else {
+    die("Error creating database: " . $conn->error);
+}
+
+// Select the database
+$conn->select_db($dbName);
+
+// Create tables
 $tables = [
     "users" => "CREATE TABLE IF NOT EXISTS users(
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,10 +47,19 @@ $tables = [
 ];
 
 foreach ($tables as $name => $sql) {
-    echo $conn->query($sql) ? "Table '$name' ready<br>" : "Error creating $name: " . $conn->error . "<br>";
+    if ($conn->query($sql) === TRUE) {
+        echo "Table '$name' ready<br>";
+    } else {
+        echo "Error creating $name: " . $conn->error . "<br>";
+    }
 }
 
-// Add role column if missing
-$conn->query("ALTER TABLE users ADD COLUMN IF NOT EXISTS role ENUM('Admin','User') NOT NULL DEFAULT 'User'");
+// Check if 'role' column exists before adding
+$result = $conn->query("SHOW COLUMNS FROM users LIKE 'role'");
+if ($result->num_rows == 0) {
+    $conn->query("ALTER TABLE users ADD COLUMN role ENUM('Admin','User') NOT NULL DEFAULT 'User'");
+    echo "Column 'role' added to users<br>";
+}
 
 $conn->close();
+?>
